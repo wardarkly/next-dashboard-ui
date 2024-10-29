@@ -1,3 +1,4 @@
+import FormModal from "@/components/FormModal";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
@@ -79,11 +80,12 @@ const TeacherListPage = () => {
             </button>
           </Link>
           {role === "admin" && (
-            <Link href={`/list/teachers/${item.id}`}>
-              <button className="w-7 h-7 flex items-center justify-center rounded-full bg-customPurple">
-                <Image src={"/delete.png"} alt="" width={16} height={16} />
-              </button>
-            </Link>
+            // <Link href={`/list/teachers/${item.id}`}>
+            //   <button className="w-7 h-7 flex items-center justify-center rounded-full bg-customPurple">
+            //     <Image src={"/delete.png"} alt="" width={16} height={16} />
+            //   </button>
+            // </Link>
+            (<FormModal type="delete" table="teacher" id={item.id} />)
           )}
         </div>
       </td>
@@ -91,7 +93,7 @@ const TeacherListPage = () => {
   );
 
   return (
-    <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
+    (<div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
       {/* TOP */}
       <div className="flex items-center justify-between">
         <h1 className="hidden md:block text-lg font-semibold">All Teachers</h1>
@@ -104,9 +106,12 @@ const TeacherListPage = () => {
             <button className="w-8 h-8 flex items-center justify-center rounded-full bg-customYellow">
               <Image src={"/sort.png"} alt="" width={14} height={14} />
             </button>
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-customYellow">
-              <Image src={"/plus.png"} alt="" width={14} height={14} />
-            </button>
+            {role === "admin" && (
+              // <button className="w-8 h-8 flex items-center justify-center rounded-full bg-customYellow">
+              //   <Image src={"/plus.png"} alt="" width={14} height={14} />
+              // </button>
+              (<FormModal type="create" table="teacher" />)
+            )}
           </div>
         </div>
       </div>
@@ -114,7 +119,7 @@ const TeacherListPage = () => {
       <Table columns={columns} renderRow={renderRow} data={teachersData} />
       {/* PAGINATION */}
       <Pagination />
-    </div>
+    </div>)
   );
 };
 
